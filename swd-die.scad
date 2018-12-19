@@ -78,6 +78,17 @@ module special_face() {
 }
 
 
+
+module render_type(type) {
+    if(type == "melee") melee();
+    if(type == "ranged") ranged();
+    if(type == "indirect") indirect();
+    if(type == "shield") shield();
+    if(type == "resource") resource();
+    if(type == "disrupt") disrupt();
+    if(type == "discard") discard();
+    if(type == "focus") focus();
+}
 module face(image, type, value, costtype, costvalue){
     if (type=="blank") {
         blank_face();
@@ -87,14 +98,7 @@ module face(image, type, value, costtype, costvalue){
         containment();
         translate([2,3,0]) text(value, size=3.7, halign="center", valign="center");
         translate([2,-3,0]) {
-            if(type == "melee") melee();
-            if(type == "ranged") ranged();
-            if(type == "indirect") indirect();
-            if(type == "shield") shield();
-            if(type == "resource") resource();
-            if(type == "disrupt") disrupt();
-            if(type == "discard") discard();
-            if(type == "focus") focus();
+            render_type(type);
         }
     }
     if (image) {
@@ -104,14 +108,7 @@ module face(image, type, value, costtype, costvalue){
         costscale = [.7,.7,1];
         scale([.5,.8,1]) rotate([0,0,-90]) translate([8.5,-10,0]) containment();
         scale(costscale) translate([-5,-11.5,0]) {
-            if(costtype == "melee") melee();
-            if(costtype == "ranged") ranged();
-            if(costtype == "indirect") indirect();
-            if(costtype == "shield") shield();
-            if(costtype == "resource") resource();
-            if(costtype == "disrupt") disrupt();
-            if(costtype == "discard") discard();
-            if(costtype == "focus") focus();
+            render_type(costtype);
         }
         scale(costscale) translate([-9,-11.5,0]) text(costvalue, size=3.7, halign="center", valign="center");
     }
